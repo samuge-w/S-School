@@ -14,20 +14,27 @@ class CheckPermission
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next,$permission_name)
+    public function handle($request, Closure $next, $permission_name)
     {
-        //return $next($request);
-         //here you have to get logged in user role
+        // Allow admins by default
+        if (Auth::check() && strcasecmp(Auth::user()->group, 'Admin') === 0) {
+            return $next($request);
+        }
+
         $role = strtolower(Auth::user()->group);
-        //$role = 'admin';
-         // so now check permission
-         $permission = DB::table('permission')->where('permission_group', strtolower($role))->where('permission_name',$permission_name)->where('permission_type','yes')->first();
-        
-        //echo "<pre>";print_r($permission);exit;
-            if($permission){
-                 return $next($request);
-              //if Permission not assigned for this user  show what you need
-            }
-            return redirect('user-have-no-permission');
+
+        // Check explicit permission assignment for the user's role
+        $permission = DB::table('permission')
+            ->where('permission_group', $role)
+            ->where('permission_name', $permission_name)
+            ->where('permission_type', 'yes')
+            ->first();
+
+        if ($permission) {
+            return $next($request);
+        }
+
+        // Return a proper 403 Forbidden instead of a missing route redirect
+        abort(403);
     }
 }

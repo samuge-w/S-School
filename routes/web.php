@@ -84,6 +84,10 @@ Route::group(['middleware' => ['web', 'activity']], function () {
     Route::get('/useredit/{id}', [UsersController::class, 'edit']);
     Route::post('/userupdate', [UsersController::class, 'update']);
     Route::get('/userdelete/{id}', [UsersController::class, 'delete']);
+    // Fallback route for permission middleware redirects in legacy code
+    Route::get('/user-have-no-permission', function () {
+        abort(403);
+    })->name('forbidden');
 });
 
 Route::group(['middleware' => ['auth', 'activity']], function () {

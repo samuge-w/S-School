@@ -24,10 +24,11 @@ return Application::configure(basePath: dirname(__DIR__))
             'checkPermission' => \App\Http\Middleware\CheckPermission::class,
             'check.license' => \App\Http\Middleware\CheckLicense::class,
             'set.locale' => \App\Http\Middleware\SetLocale::class,
+            'activity' => \jeremykenedy\LaravelLogger\App\Http\Middleware\LogActivity::class,
         ]);
 
         // Ensure locale is set on every web request after the session starts
-        $middleware->web(append: [\App\Http\Middleware\SetLocale::class]);
+        $middleware->web(append: ['set.locale']);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

@@ -371,10 +371,11 @@ table i {
                             <div class="logo d-block d-lg-none">
 
                                 <a class="js-arrow" href="#">
-                                    @if(Session::get('inName')=='')
-                                    <img src="images/icon/logo-white.png" alt="CoolAdmin" />
+                                    @php $beiraLogoPath = public_path('assets/images/schools/beira-unida-logo.png'); @endphp
+                                    @if (file_exists($beiraLogoPath))
+                                      <img src="{{ asset('assets/images/schools/beira-unida-logo.png') }}" alt="Beira Unida" />
                                     @else
-                                      <h2>{{Session::get('inName')}}</h2>
+                                      <h2>Beira Unida</h2>
                                     @endif
                                 </a>
                             </div>
@@ -627,13 +628,13 @@ table i {
                                         </div> 
                                         <div class="account-dropdown__item">
                                             <a  class="" href="{{url('/settings')}}">
-                                                <i class="zmdi zmdi-account"></i>Profile
+                                                <i class="zmdi zmdi-account"></i>{{ __('Profile') }}
                                             </a>
                                         </div>
                                         
                                         <div class="account-dropdown__item">
                                             <a class="" href="{{url('/license/settings')}}">
-                                                <i class="zmdi zmdi-key"></i>License Settings
+                                                <i class="zmdi zmdi-key"></i>{{ __('License Settings') }}
                                             </a>
                                         </div>
 

@@ -2,5 +2,10 @@
   "Login": "Entrar",
   "Register": "Registar",
   "Logout": "Sair",
-  "Toggle navigation": "Alternar navegação"
+  "Toggle navigation": "Alternar navegação",
+  "Profile": "Perfil",
+  "License Settings": "Configurações de Licença",
+  "Dashboard": "Painel",
+  "Examinations": "Exames",
+  "Communication": "Comunicação"
 }

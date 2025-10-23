@@ -26,7 +26,7 @@
 <nav class="navbar-sidebar2">
   <ul class="list-unstyled navbar__list">
 
-    <li class="{{ Request::is('dashboard') ? 'active' : '' }} has-sub"><a class="js-arrow" href="{{url('/dashboard')}}"> <i class="fas fa-tachometer-alt"></i><span> Dashboard</span></a>
+    <li class="{{ Request::is('dashboard') ? 'active' : '' }} has-sub"><a class="js-arrow" href="{{url('/dashboard')}}"> <i class="fas fa-tachometer-alt"></i><span> {{ __('Dashboard') }}</span></a>
     </li>
     @if (Session::get('userRole') =="Director")
       <li class="has-sub">
@@ -247,7 +247,7 @@
       <li class="has-sub">
         <a  class="js-arrow {{ Request::is('exam/*','question/*','paper/*','mark/*','result/*') ? 'open' : '' }}" href="#">
           <i class="glyphicon glyphicon-fire"></i>
-          Examinations
+          {{ __('Examinations') }}
           <span class="arrow {{ Request::is('exam/*','question/*','paper/*','mark/*','result/*') ? 'up' : '' }}">
             <i class="fas fa-angle-down"></i> 
           </span>
@@ -398,7 +398,7 @@
            <li class="has-sub">
             <a  class="js-arrow {{ Request::is('message','notification_type','ictcore/attendance') ? 'open' : '' }}" href="#">
             <i class="glyphicon glyphicon-envelope"></i>
-            Communication
+            {{ __('Communication') }}
             <span class="arrow {{ Request::is('message','notification_type','ictcore/attendance') ? 'up' : '' }}">
               <i class="fas fa-angle-down"></i> 
             </span>
