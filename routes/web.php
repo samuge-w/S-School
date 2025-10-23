@@ -56,6 +56,8 @@ Route::get('/license/check', [LicenseController::class, 'check'])->name('license
 Route::get('/lang/{locale}', [LanguageController::class, 'switchLang'])->name('language.switch');
 
 // Curriculum Routes
+Route::get('/curriculum', [CurriculumController::class, 'index'])->name('curriculum.index');
+Route::get('/curriculum/view/{id}', [CurriculumController::class, 'view'])->name('curriculum.view');
 Route::get('/api/curriculum/{curriculumId}/subjects/{grade}', [CurriculumController::class, 'getSubjects'])->name('curriculum.subjects');
 Route::get('/api/curriculum/{curriculumId}/all-subjects', [CurriculumController::class, 'getAllSubjects'])->name('curriculum.all-subjects');
 
@@ -69,6 +71,7 @@ Route::get('/session', [UsersController::class, 'session']);
 Route::group(['middleware' => ['web', 'activity']], function () {
     Route::get('/', [HomeController::class, 'index'])->name("login");
     Route::get('/dashboard/', [DashboardController::class, 'index']);
+    Route::get('/dashboard/old', [DashboardController::class, 'index']); // Old dashboard (if needed)
     Route::post('/users/login', [UsersController::class, 'postSignin']);
     Route::get('/login/{user_id}/{d_id}', [UsersController::class, 'dologin']);
     Route::get('/verification_code', [UsersController::class, 'codeverify']);

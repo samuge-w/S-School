@@ -360,7 +360,13 @@ else{
  //exit;
 			$branches= Branch::select("*")->get();
 			$cbranches= Branch::count();
-		return View('dashboard',compact('error','success','total','incomes','expences','balance','scetionarray','resultArray1','year','month_n','attendances_b','month','class','present','absent','ourallunpaid','ourallpaid','json_event_data','branches','cbranches','year1','fee_check_status','monthlyexp'));
+		// Beira Unida: Use new dashboard by default, old dashboard available at /dashboard/old
+		if($request->has('old') || $request->path() === 'dashboard/old') {
+			return View('dashboard',compact('error','success','total','incomes','expences','balance','scetionarray','resultArray1','year','month_n','attendances_b','month','class','present','absent','ourallunpaid','ourallpaid','json_event_data','branches','cbranches','year1','fee_check_status','monthlyexp'));
+		}
+		
+		// Use new Beira Unida-specific dashboard
+		return View('dashboard_beira_unida',compact('error','success','total'));
 	}
 	private function datahelper($data)
  	{

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\Institute;
 use App\Models\Curriculum;
 use App\Models\CurriculumSubject;
@@ -15,27 +16,21 @@ class BeiraUnidaSeeder extends Seeder
      */
     public function run(): void
     {
-        // Update or create institute information
-        Institute::updateOrCreate(
-            ['id' => 1],
+        // Note: Institute table only has basic fields (name, establish, email, web, phoneNo, address)
+        // Extended fields would require migration to add columns
+        
+        // Update basic institute info if needed
+        DB::table('institute')->updateOrInsert(
+            ['name' => 'BEIRA UNIDA COLÉGIO CRISTÃO'],
             [
                 'name' => 'BEIRA UNIDA COLÉGIO CRISTÃO',
-                'alternate_name_en' => 'Beira United Christian Academy',
-                'alternate_name_pt' => 'Colégio Cristão Beira Unida',
                 'establish' => '2020',
                 'email' => 'director@beiraunida.com',
                 'web' => 'www.beiraunida.com',
                 'phoneNo' => '(+258) 85 220 3932',
                 'address' => 'Samora Machel, Instituto Bíblico de Sofala (IBS), Pioneiros, Sofala, Beira',
-                'vision_en' => 'Partnering with the community to provide exceptional, international standard education, where the child is instructed, nurtured and disciplined for a full life: creative and rich in relationship with Christ and neighbour.',
-                'vision_pt' => 'Ser parceira da comunidade para providenciar uma educação excepcional de padrão internacional, onde a criança é instruída, nutrida e disciplinada para uma vida plena: criativa e rica no relacionamento com Cristo e com o próximo.',
-                'mission_en' => 'Providing what Charlotte Mason called a "Living Education" where every child is guided and empowered to live a full and free life, with God, with themselves, with others and with all creation. We are more concerned with the type of learner each child is becoming than with mastering particular information or techniques, as we believe that a child who has mastered the art of learning will reach their full potential in mastering particular information and techniques. Our mission is accomplished by consistently applying our fundamental beliefs to education.',
-                'mission_pt' => 'Fornecer o que Charlotte Mason chamou de "Educação Viva" onde cada criança é orientada e capacitada para viver uma vida plena e livre, com Deus, consigo mesma, com os outros e com toda a criação. Nós nos preocupamos principalmente com o tipo de aluno que cada criança está se tornando do que com o domínio de informações ou técnicas particulares, pois acreditamos que uma criança que domina a arte do aprendizado alcançará todo o seu potencial para dominar informações e técnicas particulares. Nossa missão é cumprida com a aplicação consistente de nossas convicções fundamentais à educação.',
-                'motto_en' => 'Shaping Hearts and Minds',
-                'motto_pt' => 'Formando corações e mentes',
-                'nuit' => '401 866 426',
-                'facebook' => 'Beira Unida',
-                'logo' => 'beira-unida-logo.png'
+                'updated_at' => now(),
+                'created_at' => now()
             ]
         );
 

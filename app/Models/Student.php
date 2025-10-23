@@ -15,6 +15,7 @@ class Student extends Model {
 	'dob',
 	'session',
 	'class',
+	'curriculum_id', // Beira Unida: Curriculum selection
 	'photo',
 	'fatherName',
 	'fatherCellNo',
@@ -26,6 +27,14 @@ class Student extends Model {
 	'guardian_contact',
 	'church_community'
 ];
+
+/**
+ * Get the curriculum this student follows
+ */
+public function curriculum()
+{
+	return $this->belongsTo(\App\Models\Curriculum::class, 'curriculum_id');
+}
 
 protected $primaryKey = 'id';
 public function attendance(){

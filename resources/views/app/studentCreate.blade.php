@@ -211,15 +211,39 @@ color: red;
 
           <div class="row">
             <div class="col-md-12">
-              <h3 class="text-info"> Acdemic Details</h3>
+              <h3 class="text-info"> Academic Details</h3>
               <hr>
             </div>
           </div>
           <div class="row">
            
+              {{-- Beira Unida: Curriculum Selection --}}
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="control-label" for="class">Class <b>*</b></label>
+                  <label class="control-label" for="curriculum">Curriculum <b>*</b></label>
+                  <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-education blue"></i></span>
+                    <select name="curriculum_id" id="curriculum" class="form-control" required>
+                      <option value="">-- Select Curriculum --</option>
+                      @if(!empty($curriculums))
+                        @foreach($curriculums as $curriculum)
+                          <option value="{{$curriculum->id}}" @if(old('curriculum_id')==$curriculum->id) selected @endif>
+                            {{$curriculum->name}}
+                          </option>
+                        @endforeach
+                      @endif
+                    </select>
+                  </div>
+                  <small class="text-muted">
+                    <i class="glyphicon glyphicon-info-sign"></i> 
+                    Choose: Ambleside (Charlotte Mason), Cambridge (IGCSE), or Nacional (Mozambique)
+                  </small>
+                </div>
+              </div>
+           
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="control-label" for="class">Class / Grade <b>*</b></label>
 
                   <div class="input-group">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-home blue"></i></span>

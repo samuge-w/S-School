@@ -133,19 +133,19 @@
     @endif
       @if(in_array('subject_view',$permision) || in_array('subject_add',$permision) || in_array('subject_update',$permision) || in_array('subject_delete',$permision) || in_array('section_add',$permision) || in_array('section_update',$permision) || in_array('section_delete',$permision) || in_array('section_time_table',$permision) || in_array('section_view',$permision) || in_array('class_add',$permision) || in_array('class_update',$permision) || in_array('class_delete',$permision) || in_array('class_view',$permision))
       <li class="has-sub">
-       {{-- <a  class="js-arrow {{ Request::is('subject/*') ? 'open' : '' }}" href="#">
-        --}}
-        <a  class="js-arrow @if(Request::is('subject/*', 'section/*','promotion','class/*')) open @endif" href="#">
+        <a  class="js-arrow @if(Request::is('subject/*', 'section/*','promotion','class/*','curriculum*')) open @endif" href="#">
           <i class="glyphicon glyphicon-book"></i>
-          <!-- Subject --> Academics
-          {{--<span class="arrow {{ Request::is('subject/*','class/*','promotion') ? 'up' : '' }}"><i class="fas fa-angle-down"></i> </span>
-          --}}
-          <span class="arrow  @if(Request::is('subject/*', 'section/*','class/*','promotion')) up @endif"><i class="fas fa-angle-down"></i> </span>
+          Academics
+          <span class="arrow  @if(Request::is('subject/*', 'section/*','class/*','promotion','curriculum*')) up @endif"><i class="fas fa-angle-down"></i> </span>
         </a>
-        <ul class="list-unstyled navbar__sub-list js-sub-list" style="display:{{ Request::is('subject/*','section/*','class/*','promotion') ? 'block' : 'none' }} ;">
-          {{--@if(in_array('subject_add',$permision))
-            <li class="{{ Request::is('subject/create') ? 'active' : '' }}"><a href="{{url('/subject/create')}}">Add New</a></li>
-          @endif --}} 
+        <ul class="list-unstyled navbar__sub-list js-sub-list" style="display:{{ Request::is('subject/*','section/*','class/*','promotion','curriculum*') ? 'block' : 'none' }} ;">
+          {{-- Beira Unida: Curriculum Management --}}
+          <li class="{{ Request::is('curriculum*') ? 'active' : '' }}">
+            <a href="{{url('/curriculum')}}">
+              <i class="glyphicon glyphicon-education"></i> Curriculum
+            </a>
+          </li>
+          
           @if(in_array('subject_view',$permision)) 
             <li class="{{ Request::is('subject/list') ? 'active' : '' }}"><a href="{{url('/subject/list')}}">Subject</a></li>
           @endif
@@ -438,20 +438,28 @@
         </li>
       
         <li class="has-sub">
-          <a  class="js-arrow {{ Request::is('academicYear', 'gpa', 'users', 'holidays', 'class-off', 'institute', 'ictcore?type=sms', 'ictcore?type=voice','permission','accounting') ? 'open' : '' }}" href="#">
+          <a  class="js-arrow {{ Request::is('academicYear', 'gpa', 'users', 'holidays', 'class-off', 'institute', 'ictcore?type=sms', 'ictcore?type=voice','permission','accounting','license/settings') ? 'open' : '' }}" href="#">
             <i class="glyphicon glyphicon-cog"></i>
              Settings 
-            <span class="arrow {{ Request::is('academicYear', 'gpa', 'users', 'holidays', 'class-off', 'institute', 'ictcore?type=sms', 'ictcore?type=voice','permission','accounting') ? 'up' : '' }}">
+            <span class="arrow {{ Request::is('academicYear', 'gpa', 'users', 'holidays', 'class-off', 'institute', 'ictcore?type=sms', 'ictcore?type=voice','permission','accounting','license/settings') ? 'up' : '' }}">
               <i class="fas fa-angle-down"></i> 
             </span>                            
           </a>
-          <ul class="list-unstyled navbar__sub-list js-sub-list" style="display:{{ Request::is('academicYear', 'gpa', 'users', 'holidays', 'class-off', 'institute', 'ictcore?type=sms', 'ictcore?type=voice','permission','accounting') ? 'block' : 'none' }} ;">
+          <ul class="list-unstyled navbar__sub-list js-sub-list" style="display:{{ Request::is('academicYear', 'gpa', 'users', 'holidays', 'class-off', 'institute', 'ictcore?type=sms', 'ictcore?type=voice','permission','accounting','license/settings') ? 'block' : 'none' }} ;">
+            <li class="{{ Request::is('institute') ? 'active' : '' }}"><a href="{{url('/institute')}}"><i class="glyphicon glyphicon-home"></i> Institute</a></li>
+            
+            {{-- Beira Unida: License Settings --}}
+            <li class="{{ Request::is('license/settings') ? 'active' : '' }}">
+              <a href="{{url('/license/settings')}}">
+                <i class="glyphicon glyphicon-certificate"></i> License Settings
+              </a>
+            </li>
+            
             <li class="{{ Request::is('academicYear') ? 'active' : '' }}"><a href="{{url('/academicYear')}}">Academic Year</a></li>
             <li class="{{ Request::is('gpa') ? 'active' : '' }}"><a href="{{url('/gpa')}}">GPA Ruels</a></li>
             <li class="{{ Request::is('users') ? 'active' : '' }}"><a href="{{url('/users')}}">Users</a></li>
             <li class="{{ Request::is('holidays') ? 'active' : '' }}"><a href="{{url('/holidays')}}">Holidays</a></li>
             <li class="{{ Request::is('class-off') ? 'active' : '' }}"><a href="{{url('/class-off')}}">Class Off Days</a></li>
-            <li class="{{ Request::is('institute') ? 'active' : '' }}"><a href="{{url('/institute')}}">Institute</a></li>
              @if(Auth::user()->login=='ictkashif')
             <li class="{{ Request::is('ictcore?type=sms') ? 'active' : '' }}"><a href="{{url('/ictcore?type=sms')}}">Sms Integration</a></li>
             <li class="{{ Request::is('ictcore?type=voice') ? 'active' : '' }}"><a href="{{url('/ictcore?type=voice')}}">Voice Integration</a></li>

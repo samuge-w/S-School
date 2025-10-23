@@ -40,6 +40,9 @@ class studentController extends BaseController {
 	{
 		$classes = ClassModel::select('name','code')->get();
 		
+		// Beira Unida: Load curricula for student admission
+		$curriculums = \App\Models\Curriculum::where('is_active', true)->get();
+		
 		$section = SectionModel::select('id','name')->where('class_code','=','cl1')->get();
 		//$sections = SectionModel::select('name')->get();
 		$family_id = $request->input('family_id');
@@ -54,7 +57,7 @@ class studentController extends BaseController {
 					//->having('Student.family_id', '<', 3)
 					->get();
 		//return View::Make('app.studentCreate',compact('classes'));
-		return View('app.studentCreate',compact('classes','section','families','family_id'));
+		return View('app.studentCreate',compact('classes','section','families','family_id','curriculums'));
 	}
 //
 
@@ -905,6 +908,9 @@ public function edit($id)
 	$classes = ClassModel::pluck('name','code');
 	$student= Student::find($id);
 	
+	// Beira Unida: Load curricula for student edit
+	$curriculums = \App\Models\Curriculum::where('is_active', true)->get();
+	
 	$sections = SectionModel::select('id','name')->where('class_code','=',$student->class)->get();
 	//$sections = $sections->toArray();
       // $sections = SectionModel::pluck('id', 'name')->where('class_code','=',$student->class);
@@ -912,7 +918,7 @@ public function edit($id)
 	//dd($student);
 	//$sections = SectionModel::select('name')->get();
 	//return View::Make("app.studentEdit",compact('student','classes'));
-	return View("app.studentEdit",compact('student','classes','sections'));
+	return View("app.studentEdit",compact('student','classes','sections','curriculums'));
 }
 
 
